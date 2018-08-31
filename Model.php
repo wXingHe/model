@@ -106,7 +106,7 @@ class Model
      * @param $sql {string} sql语句
      * @return int
      */
-    public function commit($sql)
+    public function execute($sql)
     {
         //$sql = "select * from {$this->tabName}";
         return $this->pdo->exec($sql);
@@ -298,7 +298,7 @@ class Model
      * @param $data
      * @return bool
      */
-    public function preinsert($data){
+    public function preInsert($data){
         //拼装一个指定参数的sql语句
         $keys = '( ';
         $values = '( ';
@@ -314,10 +314,9 @@ class Model
 
         //开启预处理
         $stem = $this->pdo->prepare($sql);
-        echo $sql;
         //执行
         $stem->execute($data);
-        echo $result = $this->pdo->lastInsertId();
+        $result = $this->pdo->lastInsertId();
         return $result ;
     }
 }
